@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>精美登录页面</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 20px;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 400px;
+            padding: 15px;
+        }
+        
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .logo i {
+            font-size: 50px;
+            color: #6a11cb;
+            margin-bottom: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 28px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #6a11cb;
+            font-size: 18px;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 15px 15px 45px;
+            border: none;
+            border-radius: 10px;
+            background: #f5f5f5;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            background: #e6e6e6;
+            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.3);
+        }
+        
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .remember-forgot label {
+            display: flex;
+            align-items: center;
+            color: #666;
+        }
+        
+        .remember-forgot input {
+            margin-right: 5px;
+        }
+        
+        .remember-forgot a {
+            color: #6a11cb;
+            text-decoration: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+        
+        .separator {
+            display: flex;
+            align-items: center;
+            margin: 25px 0;
+            color: #666;
+        }
+        
+        .separator::before,
+        .separator::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .separator span {
+            padding: 0 15px;
+            font-size: 14px;
+        }
+        
+        .social-login {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .facebook {
+            background: #3b5999;
+        }
+        
+        .google {
+            background: #dd4b39;
+        }
+        
+        .twitter {
+            background: #55acee;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .register-link {
+            text-align: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .register-link a {
+            color: #6a11cb;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .instructions {
+            margin-top: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            color: white;
+            font-size: 14px;
+        }
+        
+        .instructions h2 {
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .instructions ol {
+            padding-left: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .login-card {
+                padding: 20px;
+            }
+            
+            .logo h1 {
+                font-size: 24px;
+            }
+            
+            .input-group input {
+                padding: 12px 12px 12px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="login-card">
+            <div class="logo">
+                <i class="fas fa-lock"></i>
+                <h1>欢迎登录</h1>
+            </div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="用户名或邮箱" required>
+                </div>
+                
+                <div class="input-group">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" placeholder="密码" required>
+                </div>
+                
+                <div class="remember-forgot">
+                    <label>
+                        <input type="checkbox"> 记住我
+                    </label>
+                    <a href="#">忘记密码?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">登录</button>
+            </form>
+            
+            <div class="separator">
+                <span>或使用社交账号登录</span>
+            </div>
+            
+            <div class="social-login">
+                <div class="social-btn facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </div>
+                <div class="social-btn google">
+                    <i class="fab fa-google"></i>
+                </div>
+                <div class="social-btn twitter">
+                    <i class="fab fa-twitter"></i>
+                </div>
+            </div>
+            
+            <div class="register-link">
+                还没有账号? <a href="#">立即注册</a>
+            </div>
+        </div>
+        
+        <div class="instructions">
+            <h2>如何将本页面部署为网站：</h2>
+            <ol>
+                <li>注册GitHub账号（免费）</li>
+                <li>创建一个新的代码仓库</li>
+                <li>将本页面的HTML代码保存为index.html文件</li>
+                <li>上传到GitHub仓库</li>
+                <li>在仓库设置中启用GitHub Pages</li>
+                <li>您的网站将在 username.github.io/repository-name 上可用</li>
+            </ol>
+            <p>或者使用Netlify/Vercel等平台，只需拖拽上传HTML文件即可部署。</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // 这里可以添加登录逻辑
+            const username = this.querySelector('input[type="text"]').value;
+            const password = this.querySelector('input[type="password"]').value;
+            
+            // 简单的验证
+            if (!username || !password) {
+                showMessage('请输入用户名和密码', 'error');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showMessage('密码长度至少为6个字符', 'error');
+                return;
+            }
+            
+            // 模拟登录过程
+            showMessage('正在登录...', 'loading');
+            
+            // 模拟网络请求
+            setTimeout(() => {
+                showMessage('登录成功！', 'success');
+                // 在实际应用中，这里会跳转到其他页面
+            }, 1500);
+        });
+        
+        // 添加社交登录按钮点击事件
+        document.querySelectorAll('.social-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const platform = this.querySelector('i').parentNode.className.split(' ')[1];
+                showMessage(`您选择了通过${platform}登录`, 'success');
+            });
+        });
+        
+        // 添加触摸效果
+        document.querySelectorAll('.social-btn, .login-btn').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.transform = 'scale(0.95)';
+            });
+            
+            btn.addEventListener('touchend', function() {
+                this.style.transform = '';
+            });
+        });
+        
+        // 显示消息的函数
+        function showMessage(message, type) {
+            // 移除现有的消息
+            const existingMe
