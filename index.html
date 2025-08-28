@@ -2,361 +2,469 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>十年测试网</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BenCat - 您的智能应用解决方案</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-        
+
         body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-            padding: 20px;
             overflow-x: hidden;
         }
-        
+
         .container {
-            width: 100%;
-            max-width: 400px;
-            padding: 15px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
-        
-        .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+
+        /* 导航栏 */
+        .navbar {
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            animation: fadeIn 0.5s ease;
-        }
-        
-        .logo {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-        
-        .logo i {
-            font-size: 50px;
-            color: #6a11cb;
-            margin-bottom: 10px;
-        }
-        
-        .logo h1 {
-            font-size: 28px;
-            color: #333;
-            font-weight: 600;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6a11cb;
-            font-size: 18px;
-        }
-        
-        .input-group input {
+            padding: 1rem 0;
+            position: fixed;
             width: 100%;
-            padding: 15px 15px 15px 45px;
-            border: none;
-            border-radius: 10px;
-            background: #f5f5f5;
-            font-size: 16px;
-            color: #333;
-            outline: none;
-            transition: all 0.3s ease;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        
-        .input-group input:focus {
-            background: #e6e6e6;
-            box-shadow: 0 0 0 2px rgba(106, 17, 203, 0.3);
-        }
-        
-        .remember-forgot {
+
+        .nav-content {
             display: flex;
             justify-content: space-between;
-            margin-bottom: 20px;
-            font-size: 14px;
-        }
-        
-        .remember-forgot label {
-            display: flex;
             align-items: center;
-            color: #666;
         }
-        
-        .remember-forgot input {
-            margin-right: 5px;
-        }
-        
-        .remember-forgot a {
-            color: #6a11cb;
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
             text-decoration: none;
         }
-        
-        .login-btn {
-            width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 10px;
-            background: linear-gradient(to right, #6a11cb, #2575fc);
+
+        .logo span {
+            color: #ff6b6b;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
             color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
         }
-        
-        .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+
+        .nav-links a:hover {
+            color: #ff6b6b;
         }
-        
-        .separator {
+
+        /* 英雄区域 */
+        .hero {
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            margin: 25px 0;
-            color: #666;
-        }
-        
-        .separator::before,
-        .separator::after {
-            content: "";
-            flex: 1;
-            border-bottom: 1px solid #ddd;
-        }
-        
-        .separator span {
-            padding: 0 15px;
-            font-size: 14px;
-        }
-        
-        .social-login {
-            display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .facebook {
-            background: #3b5999;
-        }
-        
-        .google {
-            background: #dd4b39;
-        }
-        
-        .twitter {
-            background: #55acee;
-        }
-        
-        .social-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        }
-        
-        .register-link {
             text-align: center;
-            font-size: 14px;
-            color: #666;
-        }
-        
-        .register-link a {
-            color: #6a11cb;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .instructions {
-            margin-top: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            padding: 20px;
+            padding: 100px 20px 60px;
             color: white;
-            font-size: 14px;
         }
-        
-        .instructions h2 {
-            margin-bottom: 15px;
-            font-size: 18px;
+
+        .hero-content {
+            max-width: 800px;
         }
-        
-        .instructions ol {
-            padding-left: 20px;
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
-        
-        .instructions li {
-            margin-bottom: 10px;
-            line-height: 1.5;
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
         }
-        
-        @keyframes fadeIn {
+
+        /* 主按钮 */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+            margin: 2rem 0;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
+        }
+
+        /* 特性展示 */
+        .features {
+            padding: 100px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background: #f8f9fa;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        /* 内容编辑区域 */
+        .content-editor {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .editor-container {
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+
+        /* 页脚 */
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画效果 */
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-        
-        @media (max-width: 480px) {
-            .login-card {
-                padding: 20px;
-            }
-            
-            .logo h1 {
-                font-size: 24px;
-            }
-            
-            .input-group input {
-                padding: 12px 12px 12px 40px;
-            }
+
+        .animate {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* 管理员面板 */
+        .admin-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .admin-toggle {
+            background: #ff6b6b;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .admin-content {
+            position: absolute;
+            bottom: 60px;
+            right: 0;
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            display: none;
+            width: 300px;
+        }
+
+        .admin-content.active {
+            display: block;
+        }
+
+        .admin-content h3 {
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        #contentInput {
+            width: 100%;
+            min-height: 100px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            resize: vertical;
+        }
+
+        #addContentBtn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="login-card">
-            <div class="logo">
-                <i class="fas fa-lock"></i>
-                <h1>欢迎登录</h1>
-            </div>
-            
-            <form id="loginForm">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" placeholder="用户名或邮箱" required>
-                </div>
-                
-                <div class="input-group">
-                    <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="密码" required>
-                </div>
-                
-                <div class="remember-forgot">
-                    <label>
-                        <input type="checkbox"> 记住我
-                    </label>
-                    <a href="#">忘记密码?</a>
-                </div>
-                
-                <button type="submit" class="login-btn">登录</button>
-            </form>
-            
-            <div class="separator">
-                <span>或使用社交账号登录</span>
-            </div>
-            
-            <div class="social-login">
-                <div class="social-btn facebook">
-                    <i class="fab fa-facebook-f"></i>
-                </div>
-                <div class="social-btn google">
-                    <i class="fab fa-google"></i>
-                </div>
-                <div class="social-btn twitter">
-                    <i class="fab fa-twitter"></i>
-                </div>
-            </div>
-            
-            <div class="register-link">
-                还没有账号? <a href="#">立即注册</a>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="#" class="logo">Ben<span>Cat</span></a>
+            <div class="nav-links">
+                <a href="#features">特性</a>
+                <a href="#about">关于</a>
+                <a href="#contact">联系</a>
             </div>
         </div>
-        
-        <div class="instructions">
-        
-            <ol>
-                
-                <li>十年提供</li>
-                
-            
-                
-            
-        
+    </nav>
 
+    <!-- 英雄区域 -->
+    <section class="hero">
+        <div class="container hero-content">
+            <h1 class="animate">重新定义您的数字体验</h1>
+            <p class="animate">BenCat - 智能、优雅、高效的解决方案，为您的生活带来无限可能</p>
+            <a href="https://bencat.shop/shop/White" class="cta-button animate">立即体验</a>
         </div>
+    </section>
+
+    <!-- 特性展示 -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">核心特性</h2>
+            <div class="features-grid">
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>极速性能</h3>
+                    <p>采用最新技术架构，确保应用运行流畅无比，响应迅捷。</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>安全可靠</h3>
+                    <p>多重安全防护机制，保障您的数据隐私和安全。</p>
+                </div>
+                <div class="feature-card animate">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>优雅设计</h3>
+                    <p>精心设计的用户界面，提供愉悦的使用体验。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 内容编辑区域 -->
+    <section class="content-editor" id="about">
+        <div class="container">
+            <h2 class="section-title">应用介绍</h2>
+            <div class="editor-container">
+                <div id="dynamicContent">
+                    <p>在这里添加您的应用详细介绍、功能说明、使用教程等内容。</p>
+                    <p>您可以随时通过右下角的管理员面板添加新的内容区块。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="footer" id="contact">
+        <div class="container">
+            <p>&copy; 2024 BenCat. 保留所有权利。</p>
+            <p>联系我们: contact@bencat.shop</p>
+        </div>
+    </footer>
+
+    <!-- 管理员面板 -->
+    <div class="admin-panel">
+        <div class="admin-toggle" onclick="toggleAdmin()">
+            <i class="fas fa-cog"></i>
+        </div>
+        <div class="admin-content" id="adminContent">
+            <h3>添加内容</h3>
+            <textarea id="contentInput" placeholder="输入您要添加的内容..."></textarea>
+            <select id="contentType">
+                <option value="text">文本</option>
+                <option value="image">图片链接</option>
+            </select>
+            <button id="addContentBtn" onclick="addContent()">添加</button>
+   </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // 滚动动画
+        function checkScroll() {
+            const elements = document.querySelectorAll('.animate');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkScroll);
+        window.addEventListener('load', checkScroll);
+
+        // 管理员功能
+        function toggleAdmin() {
+            const adminContent = document.getElementById('adminContent');
+            adminContent.classList.toggle('active');
+        }
+
+        function addContent() {
+            const contentInput = document.getElementById('contentInput');
+            const contentType = document.getElementById('contentType');
+            const dynamicContent = document.getElementById('dynamicContent');
             
-            // 这里可以添加登录逻辑
-            const username = this.querySelector('input[type="text"]').value;
-            const password = this.querySelector('input[type="password"]').value;
-            
-            // 简单的验证
-            if (!username || !password) {
-                showMessage('请输入用户名和密码', 'error');
-                return;
+            const content = contentInput.value.trim();
+            if (!content) return;
+
+            if (contentType.value === 'text') {
+                const p = document.createElement('p');
+                p.textContent = content;
+                p.style.marginTop = '1rem';
+                p.style.padding = '1rem';
+                p.style.background = '#f8f9fa';
+                p.style.borderRadius = '8px';
+                dynamicContent.appendChild(p);
+            } else if (contentType.value === 'image') {
+                const imgContainer = document.createElement('div');
+                imgContainer.style.marginTop = '1rem';
+                imgContainer.style.textAlign = 'center';
+                
+                const img = document.createElement('img');
+                img.src = content;
+                img.alt = '应用截图';
+                img.style.maxWidth = '100%';
+                img.style.borderRadius = '10px';
+                img.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+                
+                imgContainer.appendChild(img);
+                dynamicContent.appendChild(imgContainer);
             }
-            
-            if (password.length < 6) {
-                showMessage('密码长度至少为6个字符', 'error');
-                return;
+
+            contentInput.value = '';
+            alert('内容添加成功！');
+        }
+
+        // 保护管理员功能（简单示例）
+        let attemptCount = 0;
+        document.querySelector('.admin-toggle').addEventListener('dblclick', function() {
+            const password = prompt('请输入管理员密码:');
+            if (password === 'admin123') { // 简单示例密码
+                alert('管理员模式已激活');
+            } else {
+                attemptCount++;
+                if (attemptCount >= 3) {
+                    this.style.display = 'none';
+                    alert('尝试次数过多，管理员功能已禁用');
+                }
             }
-            
-            // 模拟登录过程
-            showMessage('正在登录...', 'loading');
-            
-            // 模拟网络请求
-            setTimeout(() => {
-                showMessage('登录成功！', 'success');
-                // 在实际应用中，这里会跳转到其他页面
-            }, 1500);
         });
-        
-        // 添加社交登录按钮点击事件
-        document.querySelectorAll('.social-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const platform = this.querySelector('i').parentNode.className.split(' ')[1];
-                showMessage(`您选择了通过${platform}登录`, 'success');
-            });
-        });
-        
-        // 添加触摸效果
-        document.querySelectorAll('.social-btn, .login-btn').forEach(btn => {
-            btn.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.95)';
-            });
-            
-            btn.addEventListener('touchend', function() {
-                this.style.transform = '';
-            });
-        });
-        
-        // 显示消息的函数
-        function showMessage(message, type) {
-            // 移除现有的消息
-            const existingMe
+    </script>
+</body>
+</html>
+```
