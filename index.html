@@ -3,466 +3,453 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>menthol - 您的mc智能助手</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>个人后台管理系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
+        
         body {
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
             min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        /* 导航栏 */
-        .navbar {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-content {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
+            padding: 20px;
         }
-
-        .logo {
-            font-size: 1.8rem;
+        
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+        
+        .login-section, .admin-section {
+            padding: 40px;
+        }
+        
+        .admin-section {
+            display: none;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
             font-weight: 700;
+        }
+        
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+        }
+        
+        .input-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .input-group i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #3498db;
+            font-size: 1.2rem;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: 2px solid #ecf0f1;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            border-color: #3498db;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #3498db, #2980b9);
             color: white;
-            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.4);
         }
-
-        .logo span {
-            color: #ff6b6b;
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.6);
         }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
+        
+        .btn-primary:active {
+            transform: translateY(0);
         }
-
-        .nav-links a {
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
             color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.4);
         }
-
-        .nav-links a:hover {
-            color: #ff6b6b;
+        
+        .admin-panel {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 25px;
         }
-
-        /* 英雄区域 */
-        .hero {
-            min-height: 100vh;
+        
+        .admin-panel h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+        
+        .form-group textarea, .form-group input[type="text"] {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ecf0f1;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group textarea:focus, .form-group input[type="text"]:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 10px rgba(52, 152, 219, 0.2);
+            outline: none;
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .image-preview {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed #bdc3c7;
+            border-radius: 10px;
+            margin-top: 10px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            padding: 100px 20px 60px;
-            color: white;
-        }
-
-        .hero-content {
-            max-width: 800px;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #fff, #e0e7ff);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        /* 主按钮 */
-        .cta-button {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            text-decoration: none;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-            margin: 2rem 0;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(255, 107, 107, 0.6);
-        }
-
-        /* 特性展示 */
-        .features {
-            padding: 100px 0;
-            background: white;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 3rem;
-            color: #333;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .feature-card {
-            background: #f8f9fa;
-            padding: 2rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            color: #667eea;
-            margin-bottom: 1rem;
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        /* 内容编辑区域 */
-        .content-editor {
-            padding: 80px 0;
+            overflow: hidden;
             background: #f8f9fa;
         }
-
-        .editor-container {
-            background: white;
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin-top: 2rem;
+        
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
-
-        /* 页脚 */
-        .footer {
-            background: #333;
-            color: white;
-            padding: 3rem 0;
+        
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
             text-align: center;
+            font-weight: 500;
+            display: none;
         }
-
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .security-note {
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .login-section, .admin-section {
+                padding: 25px;
             }
-
-            .hero p {
-                font-size: 1.1rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
+            
+            .header h1 {
+                font-size: 2rem;
             }
         }
-
+        
         /* 动画效果 */
-        @keyframes fadeInUp {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        .animate {
-            animation: fadeInUp 0.6s ease forwards;
-        }
-
-        /* 管理员面板 */
-        .admin-panel {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
-        }
-
-        .admin-toggle {
-            background: #ff6b6b;
-            color: white;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
-        }
-
-        .admin-content {
-            position: absolute;
-            bottom: 60px;
-            right: 0;
-            background: white;
-            border-radius: 15px;
-            padding: 1.5rem;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            display: none;
-            width: 300px;
-        }
-
-        .admin-content.active {
-            display: block;
-        }
-
-        .admin-content h3 {
-            margin-bottom: 1rem;
-            color: #333;
-        }
-
-        #contentInput {
-            width: 100%;
-            min-height: 100px;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            resize: vertical;
-        }
-
-        #addContentBtn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
+        
+        .container {
+            animation: fadeIn 0.5s ease;
         }
     </style>
 </head>
 <body>
-    <!-- 导航栏 -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo">men<span>thol</span></a>
-            <div class="nav-links">
-                <a href="#features">特性</a>
-                <a href="#about">关于</a>
-                <a href="#contact">联系</a>
+    <div class="container">
+        <!-- 登录区域 -->
+        <div class="login-section" id="loginSection">
+            <div class="header">
+                <h1><i class="fas fa-lock"></i> 管理员登录</h1>
+                <p>请输入主密码访问后台管理系统</p>
+            </div>
+            
+            <div id="statusMessage" class="status-message"></div>
+            
+            <div class="input-group">
+                <i class="fas fa-key"></i>
+                <input type="password" id="adminPassword" placeholder="输入主密码" required>
+            </div>
+            
+            <button class="btn btn-primary" onclick="login()">登录后台</button>
+            
+            <div class="security-note">
+                <i class="fas fa-shield-alt"></i>
+                <p>这是您的个人后台管理系统，请妥善保管密码</p>
             </div>
         </div>
-    </nav>
-
-    <!-- 英雄区域 -->
-    <section class="hero">
-        <div class="container hero-content">
-            <h1 class="animate">重新定义您的游戏体验</h1>
-            <p class="animate">menthol - 智能、优雅、便捷的解决方案，为您的游戏生涯带来无限可能</p>
-            <a href="https://bencat.shop/shop/White" class="cta-button animate">立即获取</a>
-        </div>
-    </section>
-
-    <!-- 特性展示 -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="section-title">核心特性</h2>
-            <div class="features-grid">
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>极速性能</h3>
-                    <p>采用最新技术架构，确保应用运行流畅无比，响应迅捷。</p>
+        
+        <!-- 后台管理区域 -->
+        <div class="admin-section" id="adminSection">
+            <div class="header">
+                <h1><i class="fas fa-cog"></i> 后台管理</h1>
+                <p>欢迎回来，管理员</p>
+            </div>
+            
+            <div id="adminStatusMessage" class="status-message"></div>
+            
+            <div class="admin-panel">
+                <h2><i class="fas fa-edit"></i> 内容管理</h2>
+                
+                <div class="form-group">
+                    <label for="siteTitle"><i class="fas fa-heading"></i> 网站标题</label>
+                    <input type="text" id="siteTitle" placeholder="输入网站标题">
                 </div>
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>安全可靠</h3>
-                    <p>多重安全防护机制，保障您的游戏体验及安全。</p>
+                
+                <div class="form-group">
+                    <label for="siteDescription"><i class="fas fa-align-left"></i> 网站描述</label>
+                    <textarea id="siteDescription" placeholder="输入网站描述内容..."></textarea>
                 </div>
-                <div class="feature-card animate">
-                    <div class="feature-icon">
-                        <i class="fas fa-paint-brush"></i>
-                    </div>
-                    <h3>优雅设计</h3>
-                    <p>精心设计的用户界面，提供愉悦的使用体验。</p>
+                
+                <div class="form-group">
+                    <label for="introText"><i class="fas fa-paragraph"></i> 介绍文字</label>
+                    <textarea id="introText" placeholder="输入详细介绍文字..."></textarea>
                 </div>
+                
+                <div class="form-group">
+                    <label for="imageUpload"><i class="fas fa-image"></i> 上传图片</label>
+                    <input type="file" id="imageUpload" accept="image/*" style="display: none;">
+                    <button class="btn btn-primary" onclick="document.getElementById('imageUpload').click()">
+                        <i class="fas fa-upload"></i> 选择图片
+                    </button>
+                    <div class="image-preview" id="imagePreview">
+                        <span>图片预览</span>
+                    </div>
+                </div>
+                
+                <button class="btn btn-primary" onclick="saveSettings()">
+                    <i class="fas fa-save"></i> 保存设置
+                </button>
+            </div>
+            
+            <button class="btn btn-secondary" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i> 退出登录
+            </button>
+            
+            <div class="security-note">
+                <i class="fas fa-info-circle"></i>
+                <p>所有设置将自动保存在本地浏览器中</p>
             </div>
         </div>
-    </section>
-
-    <!-- 内容编辑区域 -->
-    <section class="content-editor" id="about">
-        <div class="container">
-            <h2 class="section-title">应用介绍</h2>
-            <div class="editor-container">
-                <div id="dynamicContent">
-                    <p>在这里添加您的应用详细介绍、功能说明、使用教程等内容。</p>
-                    <p>您可以随时通过右下角的管理员面板添加新的内容区块。</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 页脚 -->
-    <footer class="footer" id="contact">
-        <div class="container">
-            <p>&copy; 2024 menthol. 保留所有权利。</p>
-            <p>联系我们: 1044039035</p>
-        </div>
-    </footer>
-
-    <!-- 管理员面板 -->
-    <div class="admin-panel">
-        <div class="admin-toggle" onclick="toggleAdmin()">
-            <i class="fas fa-cog"></i>
-        </div>
-        <div class="admin-content" id="adminContent">
-            <h3>添加内容</h3>
-            <textarea id="contentInput" placeholder="输入您要添加的内容..."></textarea>
-            <select id="contentType">
-                <option value="text">文本</option>
-                <option value="image">图片链接</option>
-            </select>
-            <button id="addContentBtn" onclick="addContent()">添加</button>
-   </div>
     </div>
 
     <script>
-        // 平滑滚动
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // 滚动动画
-        function checkScroll() {
-            const elements = document.querySelectorAll('.animate');
-            elements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                if (elementTop < windowHeight - 100) {
-                    element.style.opacity = '1';
-                    element.style.transform = 'translateY(0)';
-                }
-            });
+        // 简单的SHA256哈希函数（用于密码安全存储）
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
         }
-
-        window.addEventListener('scroll', checkScroll);
-        window.addEventListener('load', checkScroll);
-
-        // 管理员功能
-        function toggleAdmin() {
-            const adminContent = document.getElementById('adminContent');
-            adminContent.classList.toggle('active');
-        }
-
-        function addContent() {
-            const contentInput = document.getElementById('contentInput');
-            const contentType = document.getElementById('contentType');
-            const dynamicContent = document.getElementById('dynamicContent');
+        
+        // 显示消息
+        function showMessage(elementId, message, type = 'erro')  {
+            const element = document.getElementById(elementId);
+            element.textContent = message;
+            element.className = `status-message ${type}`;
+            element.style.display = 'block';
             
-            const content = contentInput.value.trim();
-            if (!content) return;
-
-            if (contentType.value === 'text') {
-                const p = document.createElement('p');
-                p.textContent = content;
-                p.style.marginTop = '1rem';
-                p.style.padding = '1rem';
-                p.style.background = '#f8f9fa';
-                p.style.borderRadius = '8px';
-                dynamicContent.appendChild(p);
-            } else if (contentType.value === 'image') {
-                const imgContainer = document.createElement('div');
-                imgContainer.style.marginTop = '1rem';
-                imgContainer.style.textAlign = 'center';
-                
-                const img = document.createElement('img');
-                img.src = content;
-                img.alt = '应用截图';
-                img.style.maxWidth = '100%';
-                img.style.borderRadius = '10px';
-                img.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-                
-                imgContainer.appendChild(img);
-                dynamicContent.appendChild(imgContainer);
-            }
-
-            contentInput.value = '';
-            alert('内容添加成功！');
+            setTimeout(() => {
+                element.style.display = 'none';
+            }, 3000);
         }
-
-        // 保护管理员功能（简单示例）
-        let attemptCount = 0;
-        document.querySelector('.admin-toggle').addEventListener('dblclick', function() {
-            const password = prompt('请输入管理员密码:');
-            if (password === 'admin123') { // 简单示例密码
-                alert('管理员模式已激活');
-            } else {
-                attemptCount++;
-                if (attemptCount >= 3) {
-                    this.style.display = 'none';
-                    alert('尝试次数过多，管理员功能已禁用');
-                }
+        
+        // 初始化设置
+        function initializeSettings() {
+            // 检查是否是第一次使用
+            if (!localStorage.getItem('adminPasswordSet')) {
+                // 设置默认密码为"admin123"
+                sha256('admin123').then(hashedPassword => {
+                    localStorage.setItem('adminPassword', hashedPassword);
+                    localStorage.setItem('adminPasswordSet', 'true');
+                    showMessage('statusMessage', '初始密码已设置为: admin123', 'success');
+                });
             }
+            
+            // 加载保存的设置
+            loadSettings();
+        }
+        
+        // 登录功能
+        async function login() {
+            const password = document.getElementById('adminPassword').value;
+            
+            if (!password) {
+                showMessage('statusMessage', '请输入密码', 'error');
+                return;
+            }
+            
+            const hashedInput = await sha256(password);
+            const storedPassword = localStorage.getItem('adminPassword');
+            
+            if (hashedInput === storedPassword) {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('adminSection').style.display = 'block';
+                showMessage('adminStatusMessage', '登录成功！', 'success');
+            } else {
+                showMessage('statusMessage', '密码错误', 'error');
+            }
+        }
+        
+        // 退出登录
+        function logout() {
+            document.getElementById('adminPassword').value = '';
+            document.getElementById('adminSection').style.display = 'none';
+            document.getElementById('loginSection').style.display = 'block';
+        }
+        
+        // 加载设置
+        function loadSettings() {
+            const settings = JSON.parse(localStorage.getItem('siteSettings') || '{}');
+            
+            document.getElementById('siteTitle').value = settings.title || '';
+            document.getElementById('siteDescription').value = settings.description || '';
+            document.getElementById('introText').value = settings.intro || '';
+            
+            if (settings.imageData) {
+                document.getElementById('imagePreview').innerHTML = 
+                    `<img src="${settings.imageData}" alt="预览图片">`;
+            }
+        }
+        
+        // 保存设置
+        function saveSettings() {
+            const settings = {
+                title: document.getElementById('siteTitle').value,
+                description: document.getElementById('siteDescription').value,
+                intro: document.getElementById('introText').value,
+                imageData: document.querySelector('#imagePreview img')?.src || ''
+            };
+            
+            localStorage.setItem('siteSettings', JSON.stringify(settings));
+            showMessage('adminStatusMessage', '设置保存成功！', 'success');
+        }
+        
+        // 图片上传处理
+        document.getElementById('imageUpload').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imagePreview = document.getElementById('imagePreview');
+                    imagePreview.innerHTML = `<img src="${e.target.result}" alt="预览图片">`;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+        
+        // 修改密码功能（可选）
+        function changePassword() {
+            const newPassword = prompt('请输入新密码：');
+            if (newPassword) {
+                sha256(newPassword).then(hashedPassword => {
+                    localStorage.setItem('adminPassword', hashedPassword);
+                    alert('密码修改成功！');
+                });
+            }
+        }
+        
+        // 初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSettings();
+            
+            // 添加密码修改按钮（可选）
+            const securityNote = document.querySelector('.security-note');
+            const changePassBtn = document.createElement('button');
+            changePassBtn.className = 'btn btn-primary';
+            changePassBtn.innerHTML = '<i class="fas fa-key"></i> 修改密码';
+            changePassBtn.onclick = changePassword;
+            changePassBtn.style.marginTop = '10px';
+            securityNote.appendChild(changePassBtn);
         });
     </script>
 </body>
